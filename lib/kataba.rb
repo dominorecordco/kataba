@@ -70,7 +70,7 @@ module Kataba
     xsd_path = "#{dir_path}/#{uri_md5}.xsd"
 
     # Does the offline version exist already?
-    if !(File.exists?(xsd_path))
+    if !(File.exist?(xsd_path))
       # If not, go download
       xsd_array = []
       xsd_array << xsd_uri
@@ -110,12 +110,12 @@ module Kataba
             mirror = mirror_list[xsd_uri]
             if mirror.to_s.empty?
               # No mirror for that uri
-              file.write(open(xsd_uri).read)
+              file.write(URI.open(xsd_uri).read)
             else
-              file.write(open(mirror).read)
+              file.write(URI.open(mirror).read)
             end
           else
-            file.write(open(xsd_uri).read)
+            file.write(URI.open(xsd_uri).read)
           end
         end
       end
